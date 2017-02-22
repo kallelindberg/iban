@@ -10,15 +10,15 @@ namespace IbanCalc
     {
         static string IbanCalc(string s)
         {
-            int i = 0;
-            int mi = 0;
-            int ri = 0;
-            bool result;
-            int[] bban = new int[14];
-            int[] acc = new int[14];
-            int[] numero = new int[20];
-            int[] mtunnus = new int[6] { 1, 5, 1, 8, 0, 0 };
-            int z = (14 - 6 - (s.Length - 6));
+            int i = 0; //write indexer
+            int ni = 0; //zero position indexer
+            int ri = 0; // read indexer
+            bool result; //for parsing
+            int[] bban = new int[14]; //bban constructor repository
+            int[] acc = new int[14]; //iban account repository
+            int[] numero = new int[20]; //account construct repository
+            int[] mtunnus = new int[6] { 1, 5, 1, 8, 0, 0 }; //country identifier
+            int z = (14 - 6 - (s.Length - 6)); //zero count
             for (int c = 0; c < s.Length; c++)
             {
                 result = int.TryParse(s[c].ToString(), out bban[i]);
@@ -28,9 +28,9 @@ namespace IbanCalc
                 i++;
             }
             i = 0;
-            if (bban[0] == 4 || bban[0] == 5){ mi = 7; }
-            else { mi = 6; }
-            for (int c = 0; c < mi; c++)
+            if (bban[0] == 4 || bban[0] == 5){ ni = 7; }
+            else { ni = 6; }
+            for (int c = 0; c < ni; c++)
                 {
                     numero[i] = bban[ri];
                     i++;
@@ -68,8 +68,7 @@ namespace IbanCalc
         static void Main(string[] args)
         {
             string s = "562009-4147118";
-            string tulos = IbanCalc(s);
-            Console.WriteLine(tulos);
+            Console.WriteLine(IbanCalc(s));
             Console.ReadKey();
         }
     }
